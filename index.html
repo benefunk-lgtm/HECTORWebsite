@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiration OnePager</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <!-- GSAP and ScrollTrigger for advanced animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <div class="header-bar">
+        <div class="header-left"><img src="images/Logo_funktechnologiesV2.png" alt="funktechnologies" class="header-logo" /></div>
+        <nav class="center-navbar">
+          <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#vision">VISION</a></li>
+            <li><a href="#benefits-section">FEATURES</a></li>
+            <li><a href="#about-mission">MISSION</a></li>
+            <li><a href="#about-story">ABOUT US</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+          </ul>
+        </nav>
+        <div class="social-icons">
+          <a href="#" class="icon-btn" title="LinkedIn">
+            <img src="assets/linkedin_logo.svg" alt="LinkedIn logo" />
+          </a>
+          <a href="#" class="icon-btn" title="X">
+            <img src="assets/x_logo.svg" alt="X logo" />
+          </a>
+          <a href="#" class="icon-btn" title="Facebook">
+            <img src="assets/fb_logo.svg" alt="Facebook logo" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="hero" id="home">
+    <video autoplay muted loop playsinline>
+      <source src="images/HECTOR_Loop_StudioV2.mp4" type="video/mp4">
+      Dein Browser unterstützt kein HTML5-Video.
+    </video>
+    <div class="hero-content">
+      <h1 class="prefix-title">The future of gardening is here</h1>
+      <h1 class="floating-title">HECTOR</h1>
+      <!--<h1 class="suffix-title">#1 garden robotics in Europe</h1>-->
+      <a href="#vision" class="cta-button">Learn More</a>
+    </div>
+    <div class="logos-wrap">
+      <div class="logos-label">SUPPORTED BY:</div>
+      <div class="logos-bar" aria-label="Partner logos">
+        <img src="images/BWKl_Logo.png" alt="BWKl Logo" class="logo-img" />
+        <span class="logo-separator" aria-hidden="true"></span>
+        <img src="images/EULogo.png" alt="EU Logo" class="logo-img" />
+        <span class="logo-separator" aria-hidden="true"></span>
+        <img src="images/ExistLogo.png" alt="EXIST Logo" class="logo-img" />
+      </div>
+    </div>
+    <div class="scroll-down">
+      <span class="label">Scroll down</span>
+      <span class="arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- logos moved inside hero -->
+
+  <!-- Vision Section -->
+  <section class="vision-section blank-page" id="vision">
+    <div class="blank-content">The future of gardening is knocking at the worlds door: <strong>HECTOR</strong> is born.</div>
+    <p class="blank-subtitle">The Hedge Cutting, Trimming and Observing Robot. Hedge Cutting never was this entertaining.<br> Autonomous, efficient and safe.</p>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits-section">
+    <!-- Main visual container that stays sticky -->
+    <div class="diorama-viewport">
+      <!-- Flock animation container (Lottie JSON) -->
+      <div class="flock-wrap" aria-hidden="true">
+        <div id="flockLottie" class="flock-player"></div>
+      </div>
+      <!-- Stack of diorama images with overscan effect -->
+      <div class="diorama-stack">
+        <img src="assets/diorama-ohne-roboter.png" alt="Diorama Background" class="diorama-background" />
+        <img src="assets/roboter_station_1.png" alt="Robot Station 1 - Autonomy" class="overlay-image robot-1" />
+        <img src="assets/roboter_station_2.png" alt="Robot Station 2 - Precision" class="overlay-image robot-2" />
+        <img src="assets/Frame2.svg" alt="Precision Grid" class="overlay-image precision-grid" />
+        <img src="assets/roboter_station_3.png" alt="Robot Station 3 - Conservation" class="overlay-image robot-3" />
+      </div>
+      
+      <!-- Feature heading outside the box -->
+      <div class="feature-heading-outside">The <span class="feature-accent">HECTOR</span> Standard:</div>
+
+      <!-- Floating feature box -->
+      <div class="feature-box">
+        <div class="timeline"></div>
+        <div class="timeline-dot dot-autonomy"></div>
+        <div class="timeline-dot dot-precision"></div>
+        <div class="timeline-dot dot-conservation"></div>
+        <div class="timeline-dot dot-mover" aria-hidden="true"></div>
+        <div class="feature-list">
+          <div class="feature-item" data-feature="autonomy">
+            <h3>Autonomy</h3>
+            <p><span class="marker marker--double marker-animate">HECTOR</span> operates completely <span class="marker marker--double marker-animate">independently</span>, requiring no human intervention during hedge cutting. Advanced <span class="marker marker--double marker-animate">AI navigation</span> ensures precise trimming while <span class="marker marker--double marker-animate">avoiding obstacles</span> and maintaining perfect hedge geometry throughout your <span class="marker marker--double marker-animate">garden</span>.</p>
+          </div>
+          
+          <div class="feature-item" data-feature="precision">
+            <h3>Precision</h3>
+            <p>State-of-the-art <span class="marker marker--double marker-animate">sensors</span> and cutting mechanisms deliver <span class="marker marker--double marker-animate">millimeter-precise</span> hedge shaping. Our patented blade system adapts to different hedge types and densities, ensuring <span class="marker marker--double marker-animate">optimal results</span> every time with minimal waste.</p>
+          </div>
+          
+          <div class="feature-item" data-feature="conservation">
+            <h3>Conservation</h3>
+            <p>Zero emissions operation with <span class="marker marker--double marker-animate">whisper-quiet</span> performance protects your <span class="marker marker--double marker-animate">environment</span> and neighborhood peace. Solar charging capabilities and biodegradable cutting oil make HECTOR the sustainable choice for <span class="marker marker--double marker-animate">modern</span> gardening.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll triggers container for GSAP animations -->
+    <div class="scroll-triggers">
+      <div class="trigger" data-feature="autonomy"></div>
+      <div class="trigger" data-feature="precision"></div>
+      <div class="trigger" data-feature="conservation"></div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <!-- About Us: Mission Section -->
+  <section class="about-mission" id="about-mission">
+    <div class="about-mission__inner">
+      <h2 class="about-mission__title">Our <span class="marker marker--double marker-animate">Mission</span></h2>
+      <p class="about-mission__text"><span class="marker marker--double marker-animate">Every</span> hedge in this world won’t have to be cut by human power anymore. Hedges will be the accelerator to battle climate change. With <span class="marker marker--double marker-animate">HECTOR</span> this will be not just a dream but <span class="marker marker--double marker-animate">reality</span>.</p>
+      <div class="about-mission__facts-title">Facts:</div>
+      <div class="about-mission__facts-box" aria-label="Key facts">
+        <div class="about-mission__facts">
+          <div class="about-mission__fact">
+            <span class="fact-value"><span class="fact-number" data-target="125000000" data-decimals="0">125.000.000</span> <span class="fact-unit marker marker--double marker-animate">km</span></span>
+            <span class="fact-text">of hedges in <br>Europe</span>
+          </div>
+          <div class="about-mission__fact">
+            <span class="fact-value"><span class="fact-number" data-target="1300000000" data-decimals="0">1.300.000.000</span> <span class="fact-unit marker marker--double marker-animate">hours</span></span>
+            <span class="fact-text">each year spent on <br> hedge cutting</span>
+          </div>
+          <div class="about-mission__fact">
+            <span class="fact-value"><span class="fact-number" data-target="3.5" data-decimals="1">3.5</span> <span class="fact-unit marker marker--double marker-animate">tons of CO2</span></span>
+            <span class="fact-text">conversed into O2 <br>per km of hedge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us: Story Section -->
+  <section class="about-story" id="about-story">
+    <div class="about-story__inner">
+      <h2 class="about-story__title">Our Story</h2>
+      <div class="story-viewport">
+        <div class="story-bg-year" aria-hidden="true">
+          <span class="bg-year-wrap">
+            <span class="bg-year-fixed">202</span><span class="bg-year-last">0</span>
+          </span>
+        </div>
+        <div class="story-simple">
+          <div class="story-simple-line"></div>
+          <div class="story-simple-point" data-year="2020" style="left: 20vw;">
+            <div class="year-above">2020</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+          <div class="story-simple-point" data-year="2021" style="left: 80vw;">
+            <div class="year-above">2021</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+          <div class="story-simple-point" data-year="2022" style="left: 120vw;">
+            <div class="year-above">2022</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+          <div class="story-simple-point" data-year="2023" style="left: 140vw;">
+            <div class="year-above">2023</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+          <div class="story-simple-point" data-year="2024" style="left: 160vw;">
+            <div class="year-above">2024</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+          <div class="story-simple-point" data-year="2025" style="left: 180vw;">
+            <div class="year-above">2025</div>
+            <div class="dot"></div>
+            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Contact + Footer Gradient Wrapper -->
+  <section class="contact-footer-wrap" aria-label="Contact and footer">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-inner">
+        <div class="contact-grid">
+          <div class="contact-left">
+            <div class="contact-eyebrow">Contact us</div>
+            <h2 class="contact-title">Let's get in touch</h2>
+            <p class="contact-subtitle">or reach out manually to us at <a href="mailto:hello@funktechnologies.com">hello@funktechnologies.com</a></p>
+          </div>
+          <div class="contact-right">
+            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="off" novalidate>
+              <input type="hidden" name="form-name" value="contact" />
+              <div style="display:none">
+                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+              </div>
+              <div class="form-group">
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" name="fullName" />
+              </div>
+              <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input type="email" id="emailAddress" name="emailAddress" />
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" />
+              </div>
+              <div class="form-group">
+                <label for="messageField">Message</label>
+                <textarea id="messageField" name="messageField" rows="5"></textarea>
+              </div>
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="agreePrivacy" name="agreePrivacy" />
+                <label for="agreePrivacy">I hereby agree to the <span class="privacy-link">Privacy Policy</span> terms.</label>
+              </div>
+              <div class="form-status" aria-live="polite" style="min-height:1.2rem;font-size:0.9rem;margin-bottom:0.4rem;color:#a3e635;"></div>
+              <button type="submit" class="contact-submit">Submit Form</button>
+            </form>
+            <script>
+              (function(){
+                const form = document.getElementById('contactForm');
+                if(!form) return;
+                const statusEl = form.querySelector('.form-status');
+                function setStatus(msg, ok){ if(!statusEl) return; statusEl.style.color = ok ? '#86efac' : '#fca5a5'; statusEl.textContent = msg; }
+                const validEmail = v => /^(?:[a-zA-Z0-9_'^&\/+-])+(?:\.(?:[a-zA-Z0-9_'^&\/+-])+)*@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})$/.test(v);
+                function encode(data){ return new URLSearchParams(data).toString(); }
+                form.addEventListener('submit', function(e){
+                  e.preventDefault();
+                  setStatus('', true);
+                  const fullName = (form.querySelector('#fullName')||{}).value?.trim() || '';
+                  const email = (form.querySelector('#emailAddress')||{}).value?.trim() || '';
+                  const phone = (form.querySelector('#phoneNumber')||{}).value?.trim() || '';
+                  const message = (form.querySelector('#messageField')||{}).value?.trim() || '';
+                  const agree = (form.querySelector('#agreePrivacy')||{}).checked;
+                  if(!fullName || !email || !message){ return setStatus('Please fill name, email and message.', false); }
+                  if(!validEmail(email)){ return setStatus('Please enter a valid email address.', false); }
+                  if(!agree){ return setStatus('Please agree to the Privacy Policy terms.', false); }
+                  const data = {
+                    'form-name': form.getAttribute('name') || 'contact',
+                    fullName, email, phone, message
+                  };
+                  setStatus('Sending…', true);
+                  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: encode(data) })
+                    .then(resp => { if(resp.ok){ setStatus('Thanks, your message has been sent!', true); form.reset(); } else { throw new Error('Network'); } })
+                    .catch(() => setStatus('Oops, something went wrong.', false));
+                });
+              })();
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top-line" aria-hidden="true"></div>
+
+        <div class="footer-main">
+          <div class="footer-col footer-nav">
+            <ul class="footer-list">
+              <li class="footer-list-title">Navigation</li>
+              <li><a href="#vision">Vision</a></li>
+              <li><a href="#benefits-section">Features</a></li>
+              <li><a href="#about-mission">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-socials">
+            <ul class="footer-list">
+              <li class="footer-list-title">Socials</li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">facebook</a></li>
+              <li><a href="#">x.com</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-brand">
+            <div class="footer-brand-line">
+              <span class="brand-text">funktechnologies on</span>
+              <div class="footer-icons">
+                <a href="#" class="icon-btn" title="LinkedIn">
+                  <img src="assets/linkedin_logo.svg" alt="LinkedIn logo" />
+                </a>
+                <a href="#" class="icon-btn" title="X">
+                  <img src="assets/x_logo.svg" alt="X logo" />
+                </a>
+                <a href="#" class="icon-btn" title="Facebook">
+                  <img src="assets/fb_logo.svg" alt="Facebook logo" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-legal">
+          <div class="legal-left">© 2025, funktechnologies GmbH , Designed by Benedikt Funk</div>
+          <div class="legal-right">
+            <ul class="legal-list">
+              <li><a class="legal-link" href="#">Privacy Policy</a></li>
+              <li><a class="legal-link" href="#">Terms of use</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="main.js"></script>
+</body>
+</html>

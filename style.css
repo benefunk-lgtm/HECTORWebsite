@@ -504,14 +504,14 @@ section.about p, section.contact p {
   transform: none !important;
 }
 
-/* Main visual container that stays sticky */
+/* Main visual container (defaults) */
 .diorama-viewport {
   position: relative;
   top: auto; /* no sticky after refactor */
   width: 100vw;
   height: 130vh; /* Match the diorama height to prevent clipping */
   overflow: visible; /* Allow content to extend beyond viewport */
-  background: #f0f0f0; /* Fixed background color */
+  background: transparent; /* avoid visible white/grey band from pin-spacer */
   z-index: 5;
   display: flex;
   align-items: center;
@@ -520,12 +520,21 @@ section.about p, section.contact p {
   padding-bottom: 8rem; /* Use padding instead of margin */
 }
 
-/* Make GSAP pin-spacer completely transparent */
-.pin-spacer {
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
+/* Sticky mode (no GSAP pin) */
+/* sticky mode rules removed (reverting to GSAP pin) */
+.use-sticky #benefits-section .diorama-viewport {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding-top: 0;
+  padding-bottom: 0;
+  z-index: 5;
 }
+
+/* Make GSAP pin-spacer completely transparent */
+/* Keep GSAP pin-spacer invisible but structurally intact */
+.pin-spacer { border: none !important; box-shadow: none !important; background: transparent !important; }
 
 /* --- Flock (Lottie) positioning above diorama --- */
 .flock-wrap {

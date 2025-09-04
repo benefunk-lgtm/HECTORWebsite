@@ -56,6 +56,10 @@ ScrollReveal().reveal('.contact-form', {
 // ===== BENEFITS SECTION SCROLLYTELLING =====
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Feature flag to toggle CSS sticky pinning for benefits
+  const USE_CSS_STICKY = false;
+  let benefitsFrozen = false;
+  try { if (USE_CSS_STICKY) document.documentElement.classList.add('use-sticky'); } catch (_) {}
   // ========== Header shiny hover (safe to remove) ==========
   try {
     const headerBar = document.querySelector('.header-bar');
@@ -163,17 +167,18 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Create the main timeline for the benefits section
   
-  // Create a single ScrollTrigger that pins the diorama viewport and controls animations
-  const benefitsTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#benefits-section',
-      start: 'top -15%',
-      end: '+=320%',
-      pin: '.diorama-viewport',
-      pinSpacing: true,
-      scrub: 1,
-      markers: false,
-      onLeave: self => {
+  // Create a single ScrollTrigger that controls animations (no pin when using CSS sticky)
+  // After the first full pass, we lock overlay animations so only the list items react on backscroll
+  let overlaysLocked = false;
+  const benefitsST = {
+    trigger: '#benefits-section',
+    start: 'top -15%',
+    end: '+=320%',
+    scrub: 1,
+    markers: false,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    onLeave: self => {
         // Ensure final visual state is locked in
         gsap.set(['.robot-1', '.robot-2', '.robot-3', '.precision-grid'], {
           opacity: 1,
@@ -187,33 +192,137 @@ document.addEventListener('DOMContentLoaded', function() {
         if (moverDot && finalDot) {
           moverDot.style.top = finalDot.offsetTop + 'px';
         }
-
-        // Remove pin-spacer without visual jump by compensating scroll position
-        const viewportEl = document.querySelector('.diorama-viewport');
-        const beforeTop = viewportEl ? viewportEl.getBoundingClientRect().top : 0;
-        if (self) self.kill(true);
-        benefitsTimeline.kill();
-        const afterTop = viewportEl ? viewportEl.getBoundingClientRect().top : 0;
-        const delta = afterTop - beforeTop;
-        if (delta !== 0) {
-          window.scrollBy(0, delta);
-        }
-
-        // Keep section at a stable height and gently position viewport in view
-        const benefitsSectionEl = document.getElementById('benefits-section');
-        if (benefitsSectionEl) {
-          benefitsSectionEl.style.minHeight = '140vh';
-          benefitsSectionEl.classList.add('finalized');
-          // Do not hide triggers to avoid layout jump; CSS keeps them zero-height
-        }
-
-        // Avoid refresh here to prevent reflow; finalized state ensures stability
+        // Prevent overlay animations on any subsequent backscroll
+        overlaysLocked = true;
+        // Freeze future pin/animation on backscroll and shrink section height
+        benefitsFrozen = true;
+        try {
+          const host = document.getElementById('benefits-section');
+          const viewportEl = document.querySelector('.diorama-viewport');
+          if (host && viewportEl) {
+            const next = host.nextElementSibling;
+            const beforeNextTop = next ? next.getBoundingClientRect().top : null;
+            const targetHeight = 1; // collapse to minimal height
+            host.classList.add('benefits-frozen');
+            host.style.minHeight = targetHeight + 'px';
+            requestAnimationFrame(() => {
+              if (next && beforeNextTop != null) {
+                const afterNextTop = next.getBoundingClientRect().top;
+                const delta = afterNextTop - beforeNextTop;
+                if (delta) window.scrollBy(0, delta);
+              }
+            });
+          }
+        } catch (_) {}
+        // Normalize after unpin
+        requestAnimationFrame(() => { try { ScrollTrigger.refresh(); } catch (_) {} });
+        setTimeout(() => { try { ScrollTrigger.refresh(); } catch (_) {} }, 50);
       },
-      onUpdate: (self) => {
-        // Animation progress tracking (optional)
+    onUpdate: (self) => {
+        // Fade the mover dot only when arriving at Conservation while scrolling down
+        try {
+          const dot = document.querySelector('.timeline-dot.dot-mover');
+          if (!dot) return;
+          const prog = self.progress;
+          const dir = self.direction; // 1 = forward (down), -1 = back (up)
+          if (dir === 1 && prog > 0.98) {
+            gsap.to(dot, { opacity: 0, duration: 0.25, ease: 'power1.out', overwrite: 'auto' });
+          } else if (dir === -1 && prog < 0.98) {
+            // Ensure dot is visible again when scrolling back up (do not fade at Autonomy)
+            gsap.to(dot, { opacity: 1, duration: 0.2, ease: 'power1.out', overwrite: 'auto' });
+          }
+        } catch (_) {}
       }
-    }
-  });
+  };
+  if (USE_CSS_STICKY) {
+    benefitsST.pin = false;
+    benefitsST.pinSpacing = false;
+    // Ensure the sticky container has correct computed height on init
+    try {
+      const host = document.getElementById('benefits-section');
+      const pinEl = document.querySelector('.diorama-viewport');
+      if (host && pinEl) {
+        host.style.minHeight = Math.max(host.clientHeight, window.innerHeight * 4) + 'px';
+      }
+    } catch (_) {}
+  } else {
+    benefitsST.pin = '.diorama-viewport';
+    benefitsST.pinSpacing = true;
+    benefitsST.pinType = 'fixed';
+    benefitsST.pinReparent = true;
+  }
+  const benefitsTimeline = gsap.timeline({ scrollTrigger: benefitsST });
+
+  // CSS-sticky polyfill via JS (fixed/absolute) to avoid spacer issues
+  if (USE_CSS_STICKY) {
+    try {
+      const sectionEl = document.getElementById('benefits-section');
+      const viewportEl = document.querySelector('.diorama-viewport');
+      if (sectionEl && viewportEl) {
+        let startY = 0;
+        let endY = 0;
+        let vh = window.innerHeight || document.documentElement.clientHeight;
+        const recalc = () => {
+          const rect = sectionEl.getBoundingClientRect();
+          const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+          startY = rect.top + scrollY; // when section top reaches viewport top
+          // keep viewport fixed until section bottom reaches viewport bottom
+          const sectionHeight = sectionEl.offsetHeight;
+          endY = startY + Math.max(sectionHeight - vh, 0);
+        };
+        const applyState = () => {
+          const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+          if (benefitsFrozen) {
+            viewportEl.style.position = 'relative';
+            viewportEl.style.top = '0';
+            viewportEl.style.left = '0';
+            viewportEl.style.width = '100%';
+            viewportEl.style.height = '';
+            return;
+          }
+          if (scrollY < startY) {
+            // before: normal flow
+            viewportEl.style.position = 'relative';
+            viewportEl.style.top = '0';
+            viewportEl.style.left = '0';
+            viewportEl.style.width = '100%';
+          } else if (scrollY >= startY && scrollY < endY) {
+            // during: fixed
+            viewportEl.style.position = 'fixed';
+            viewportEl.style.top = '0';
+            viewportEl.style.left = '0';
+            viewportEl.style.width = '100vw';
+            viewportEl.style.height = vh + 'px';
+          } else {
+            // after: lock to bottom of section
+            viewportEl.style.position = 'absolute';
+            viewportEl.style.top = 'auto';
+            viewportEl.style.left = '0';
+            viewportEl.style.bottom = '0';
+            viewportEl.style.width = '100%';
+            viewportEl.style.height = vh + 'px';
+          }
+        };
+        const onScroll = () => { applyState(); };
+        const onResize = () => { vh = window.innerHeight || document.documentElement.clientHeight; recalc(); applyState(); };
+        recalc();
+        applyState();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onResize, { passive: true });
+        // detach when frozen so backscroll stays static
+        const stopWhenFrozen = () => {
+          if (benefitsFrozen) {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onResize);
+            applyState();
+          } else {
+            requestAnimationFrame(stopWhenFrozen);
+          }
+        };
+        requestAnimationFrame(stopWhenFrozen);
+      }
+    } catch (_) {}
+  }
   
   // Setup moving timeline dot positions and pulse effect
   const moverDotEl = document.querySelector('.timeline-dot.dot-mover');
@@ -231,12 +340,14 @@ document.addEventListener('DOMContentLoaded', function() {
     gsap.fromTo(moverDotEl, { scale: 1 }, { scale: 1.22, duration: 0.18, yoyo: true, repeat: 1, ease: 'power1.out' });
   };
   const playAutonomyVisuals = () => {
+    if (overlaysLocked) return; // skip overlays after first pass
     gsap.killTweensOf('.robot-1');
     gsap.set('.robot-1', { opacity: 1 });
     gsap.fromTo('.robot-1', { scale: 1 }, { scale: 1.03, duration: 0.6, ease: 'power1.out' });
     gsap.to('.robot-1', { scale: 1, duration: 0.6, ease: 'power1.out', delay: 0.6 });
   };
   const playPrecisionVisuals = () => {
+    if (overlaysLocked) return; // skip overlays after first pass
     gsap.killTweensOf(['.robot-2', '.precision-grid']);
     gsap.fromTo('.precision-grid', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power1.out' });
     gsap.set('.robot-2', { opacity: 1 });
@@ -244,6 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gsap.to('.robot-2', { scale: 1, duration: 0.6, ease: 'power1.out', delay: 0.6 });
   };
   const playConservationVisuals = () => {
+    if (overlaysLocked) return; // skip overlays after first pass
     try { console.log('[FLOCK] conservation activated'); } catch (_) {}
     gsap.killTweensOf('.robot-3');
     gsap.set('.robot-3', { opacity: 1 });

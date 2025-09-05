@@ -793,8 +793,13 @@ document.addEventListener('DOMContentLoaded', function() {
         statusEl.textContent = msg;
       };
       const validEmail = (v) => /^(?:[a-zA-Z0-9_'^&\/+-])+(?:\.(?:[a-zA-Z0-9_'^&\/+-])+)*@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})$/.test(v);
-      const encode = (data) => new URLSearchParams(data).toString();
-      form.addEventListener('submit', async (e) => {
+      const toFormData = () => {
+        const fd = new FormData(form);
+        // Ensure Netlify picks up the form name and fields
+        if (!fd.get('form-name')) fd.set('form-name', form.getAttribute('name') || 'contact');
+        return fd;
+      };
+      const onSubmit = async (e) => {
         e.preventDefault();
         setStatus('', true);
         const fullName = getVal('fullName').trim();
@@ -805,25 +810,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!fullName || !email || !message) return setStatus('Please fill name, email and message.', false);
         if (!validEmail(email)) return setStatus('Please enter a valid email address.', false);
         if (!agree) return setStatus('Please agree to the Privacy Policy terms.', false);
-        // Netlify Forms AJAX submit
-        const payload = {
-          'form-name': form.getAttribute('name') || 'contact',
-          fullName, email, phone, message
-        };
+        // Netlify Forms AJAX submit (FormData)
         try {
           setStatus('Sending…', true);
-          const resp = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode(payload)
-          });
-          if (!resp.ok) throw new Error('Network');
+          const resp = await fetch(form.getAttribute('action') || '/', { method: 'POST', body: toFormData() });
+          if (!(resp.status >= 200 && resp.status < 400)) throw new Error('Network');
           setStatus('Thanks, your message has been sent!', true);
           form.reset();
-        } catch (_) {
-          setStatus('Oops, something went wrong.', false);
+        } catch (err) {
+          // Fallback to normal submit (lets Netlify handle it server-side)
+          try {
+            setStatus('Sending via fallback…', true);
+            form.removeEventListener('submit', onSubmit);
+            form.submit();
+          } catch (_) {
+            setStatus('Oops, something went wrong.', false);
+          }
         }
-      });
+      };
+      form.addEventListener('submit', onSubmit);
     }
   } catch (_) {}
 });

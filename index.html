@@ -225,7 +225,7 @@
             <p class="contact-subtitle">or reach out manually to us at <a href="mailto:hello@funktechnologies.com">hello@funktechnologies.com</a></p>
           </div>
           <div class="contact-right">
-            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="off" novalidate>
+            <form class="contact-form" id="contactForm" name="contact" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="off" novalidate>
               <input type="hidden" name="form-name" value="contact" />
               <div style="display:none">
                 <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
@@ -253,36 +253,7 @@
               <div class="form-status" aria-live="polite" style="min-height:1.2rem;font-size:0.9rem;margin-bottom:0.4rem;color:#a3e635;"></div>
               <button type="submit" class="contact-submit">Submit Form</button>
             </form>
-            <script>
-              (function(){
-                const form = document.getElementById('contactForm');
-                if(!form) return;
-                const statusEl = form.querySelector('.form-status');
-                function setStatus(msg, ok){ if(!statusEl) return; statusEl.style.color = ok ? '#86efac' : '#fca5a5'; statusEl.textContent = msg; }
-                const validEmail = v => /^(?:[a-zA-Z0-9_'^&\/+-])+(?:\.(?:[a-zA-Z0-9_'^&\/+-])+)*@(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})$/.test(v);
-                function encode(data){ return new URLSearchParams(data).toString(); }
-                form.addEventListener('submit', function(e){
-                  e.preventDefault();
-                  setStatus('', true);
-                  const fullName = (form.querySelector('#fullName')||{}).value?.trim() || '';
-                  const email = (form.querySelector('#emailAddress')||{}).value?.trim() || '';
-                  const phone = (form.querySelector('#phoneNumber')||{}).value?.trim() || '';
-                  const message = (form.querySelector('#messageField')||{}).value?.trim() || '';
-                  const agree = (form.querySelector('#agreePrivacy')||{}).checked;
-                  if(!fullName || !email || !message){ return setStatus('Please fill name, email and message.', false); }
-                  if(!validEmail(email)){ return setStatus('Please enter a valid email address.', false); }
-                  if(!agree){ return setStatus('Please agree to the Privacy Policy terms.', false); }
-                  const data = {
-                    'form-name': form.getAttribute('name') || 'contact',
-                    fullName, email, phone, message
-                  };
-                  setStatus('Sending…', true);
-                  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: encode(data) })
-                    .then(resp => { if(resp.ok){ setStatus('Thanks, your message has been sent!', true); form.reset(); } else { throw new Error('Network'); } })
-                    .catch(() => setStatus('Oops, something went wrong.', false));
-                });
-              })();
-            </script>
+            
           </div>
         </div>
       </div>

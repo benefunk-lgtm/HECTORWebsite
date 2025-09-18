@@ -1,57 +1,3 @@
-// ScrollReveal minimal, performant animations - TEMPORARILY DISABLED FOR TESTING
-/*
-ScrollReveal().reveal('.vision-section', {
-  duration: 400,
-  distance: '30px',
-  origin: 'bottom',
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.team-section', {
-  duration: 400,
-  distance: '30px',
-  origin: 'bottom',
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.team-member', {
-  duration: 400,
-  distance: '20px',
-  origin: 'bottom',
-  interval: 100,
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.invest-section', {
-  duration: 400,
-  distance: '30px',
-  origin: 'bottom',
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.fact-box', {
-  duration: 400,
-  distance: '20px',
-  origin: 'right',
-  interval: 100,
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.contact-section', {
-  duration: 400,
-  distance: '30px',
-  origin: 'bottom',
-  easing: 'ease-out',
-  reset: false
-});
-ScrollReveal().reveal('.contact-form', {
-  duration: 400,
-  distance: '20px',
-  origin: 'bottom',
-  easing: 'ease-out',
-  reset: false
-});
-*/
 
 // ===== BENEFITS SECTION SCROLLYTELLING =====
 // Wait for DOM to be fully loaded
@@ -343,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (overlaysLocked) return; // skip overlays after first pass
     gsap.killTweensOf('.robot-1');
     gsap.set('.robot-1', { opacity: 1 });
-    gsap.fromTo('.robot-1', { scale: 1 }, { scale: 1.03, duration: 0.6, ease: 'power1.out' });
+    gsap.fromTo('.robot-1', { scale: 1 }, { scale: 1.005, duration: 0.6, ease: 'power1.out' });
     gsap.to('.robot-1', { scale: 1, duration: 0.6, ease: 'power1.out', delay: 0.6 });
   };
   const playPrecisionVisuals = () => {
@@ -351,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gsap.killTweensOf(['.robot-2', '.precision-grid']);
     gsap.fromTo('.precision-grid', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power1.out' });
     gsap.set('.robot-2', { opacity: 1 });
-    gsap.fromTo('.robot-2', { scale: 1 }, { scale: 1.03, duration: 0.6, ease: 'power1.out' });
+    gsap.fromTo('.robot-2', { scale: 1 }, { scale: 1.005, duration: 0.6, ease: 'power1.out' });
     gsap.to('.robot-2', { scale: 1, duration: 0.6, ease: 'power1.out', delay: 0.6 });
   };
   const playConservationVisuals = () => {
@@ -359,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
     try { console.log('[FLOCK] conservation activated'); } catch (_) {}
     gsap.killTweensOf('.robot-3');
     gsap.set('.robot-3', { opacity: 1 });
-    gsap.fromTo('.robot-3', { scale: 1 }, { scale: 1.03, duration: 0.6, ease: 'power1.out' });
+    gsap.fromTo('.robot-3', { scale: 1 }, { scale: 1.005, duration: 0.6, ease: 'power1.out' });
     gsap.to('.robot-3', { scale: 1, duration: 0.6, ease: 'power1.out', delay: 0.6 });
     // Flock Lottie (JSON) play-once
     if (flockWrap && flockContainer && !flockHasPlayed) {
@@ -422,6 +368,117 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Benefits scrollytelling initialized successfully
+  
+  // ===== GLASS CIRCLE ANIMATION =====
+  // Glass circle scroll-triggered animation
+  const glassCircle = document.querySelector('.glassDropMount');
+  const factDot1 = document.querySelector('.fact-dot-1');
+  const factDot2 = document.querySelector('.fact-dot-2');
+  const factDot3 = document.querySelector('.fact-dot-3');
+  const aboutMissionSection = document.querySelector('.about-mission');
+
+  let glassCirclePosY;
+  let factDot1PosY;
+  let factDot2PosY;
+  let factDot3PosY;
+  let differenceScrolly;
+
+  
+
+  ScrollTrigger.create({
+    trigger: aboutMissionSection,
+    start: 'top top',
+    end: 'top top',
+    onEnter: () => {
+      glassCirclePosY = glassCircle.getBoundingClientRect().top + window.scrollY - 20;
+      factDot1PosY = factDot1.getBoundingClientRect().top + window.scrollY - 20;
+      factDot2PosY = factDot2.getBoundingClientRect().top + window.scrollY - 30;
+      factDot3PosY = factDot3.getBoundingClientRect().top + window.scrollY - 30;
+      differenceScrolly = window.scrollY;
+  
+
+      console.log('Glass circle position:', glassCirclePosY);
+      console.log('glassCircle:', glassCircle.getBoundingClientRect().top);
+      console.log('Fact dot 1 position:', factDot1PosY);
+      console.log('Fact dot 2 position:', factDot2PosY);
+      console.log('Fact dot 3 position:', factDot3PosY);
+      console.log('Difference scrollly:', differenceScrolly);
+
+      if (glassCircle && factDot1 && factDot2 && factDot3) {
+        console.log('Glass circle animation elements found');
+        
+        // Set initial position using the same positioning as fact-dot-1
+        gsap.set(glassCircle, {
+          top: factDot1PosY      
+        });
+      } else {
+        console.log('Glass circle animation elements not found');
+        console.log('Missing elements:', {
+          glassCircle: !glassCircle,
+          factDot1: !factDot1,
+          factDot2: !factDot2,
+          factDot3: !factDot3
+        });
+      }
+    }
+  });
+
+
+  
+  
+    
+  //   // Create individual ScrollTriggers for each fact dot
+  //   // When fact-dot-2 reaches a bit below center of the viewport
+    const st2 = ScrollTrigger.create({
+      trigger: factDot2,
+      start: 'center 80%',
+      end: 'center 80%',
+      onEnter: () => {
+        console.log('Moving to fact-dot-2');
+        gsap.to(glassCircle, {
+          top: factDot2PosY,
+          duration: 1.6,
+          ease: 'power2.out'
+        });
+      },
+      onLeaveBack: () => {
+        console.log('Moving back to fact-dot-1');
+        gsap.to(glassCircle, {
+          top: factDot1PosY,
+          duration: 1.6,
+          ease: 'power2.out'
+        });
+      }
+    });
+    
+    // When fact-dot-3 reaches a bit below center of the viewport
+    const st3 = ScrollTrigger.create({
+      trigger: factDot3,
+      start: 'center 80%',
+      end: 'center 80%',
+      onEnter: () => {
+        console.log('Moving to fact-dot-3');
+        gsap.to(glassCircle, {
+          top: factDot3PosY,
+          duration: 1.6,
+          ease: 'power2.out'
+        });
+      },
+      onLeaveBack: () => {
+        console.log('Moving back to fact-dot-2');
+        gsap.to(glassCircle, {
+          top: factDot2PosY,
+          duration: 1.6,
+          ease: 'power2.out'
+        });
+      }
+    });
+    
+    console.log('ScrollTriggers created:', st2, st3);
+    
+  
+
+
   
   // Remove previous listeners/hacks (replaced by onLeave)
   
@@ -493,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
             obs.unobserve(entry.target);
           }
         });
-      }, { root: null, rootMargin: '0px', threshold: 0.3 });
+      }, { root: null, rootMargin: '0px 0px -55% 0px', threshold: 0.05 });
       io.observe(missionSection);
     }
   } catch (_) {}

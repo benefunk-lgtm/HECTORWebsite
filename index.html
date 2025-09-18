@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="./libs/liquid-glass-js/glass.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
@@ -21,6 +22,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 </head>
 <body>
+  <div class = "glassDropMount"></div>
   <header class="main-header">
     <div class="header-content">
       <div class="header-bar">
@@ -57,8 +59,7 @@
     <div class="hero-content">
       <h1 class="prefix-title">The future of gardening is here</h1>
       <h1 class="floating-title">HECTOR</h1>
-      <!--<h1 class="suffix-title">#1 garden robotics in Europe</h1>-->
-      <!--<a href="#vision" class="cta-button">Learn More</a>-->
+      
     </div>
     <div class="logos-wrap">
       <div class="logos-label">SUPPORTED BY:</div>
@@ -94,7 +95,7 @@
       </div>
       <!-- Stack of diorama images with overscan effect -->
       <div class="diorama-stack">
-        <img src="assets/diorama.webp" alt="Diorama Background" class="diorama-background" />
+        <img src="assets/dioramalightblueBG_v2.png" alt="Diorama Background" class="diorama-background" />
         <img src="assets/roboter_station_1.png" alt="Robot Station 1 - Autonomy" class="overlay-image robot-1" />
         <img src="assets/roboter_station_2.png" alt="Robot Station 2 - Precision" class="overlay-image robot-2" />
         <img src="assets/Frame2.svg" alt="Precision Grid" class="overlay-image precision-grid" />
@@ -102,9 +103,9 @@
       </div>
       
       <!-- Feature heading outside the box -->
-      <div class="feature-heading-outside">The <span class="feature-accent">HECTOR</span> Standard:</div>
+      <!--<div class="feature-heading-outside">The <span class="feature-accent">HECTOR</span> Standard:</div>-->
 
-      <!-- Floating feature box -->
+      <!-- Floating feature box with simple black background -->
       <div class="feature-box">
         <div class="timeline"></div>
         <div class="timeline-dot dot-autonomy"></div>
@@ -112,20 +113,20 @@
         <div class="timeline-dot dot-conservation"></div>
         <div class="timeline-dot dot-mover" aria-hidden="true"></div>
         <div class="feature-list">
-          <div class="feature-item" data-feature="autonomy">
-            <h3>Autonomy</h3>
-            <p><span class="marker marker--double marker-animate">HECTOR</span> operates completely <span class="marker marker--double marker-animate">independently</span>, requiring no human intervention during hedge cutting. Advanced <span class="marker marker--double marker-animate">AI navigation</span> ensures precise trimming while <span class="marker marker--double marker-animate">avoiding obstacles</span> and maintaining perfect hedge geometry throughout your <span class="marker marker--double marker-animate">garden</span>.</p>
-          </div>
-          
-          <div class="feature-item" data-feature="precision">
-            <h3>Precision</h3>
-            <p>State-of-the-art <span class="marker marker--double marker-animate">sensors</span> and cutting mechanisms deliver <span class="marker marker--double marker-animate">millimeter-precise</span> hedge shaping. Our patented blade system adapts to different hedge types and densities, ensuring <span class="marker marker--double marker-animate">optimal results</span> every time with minimal waste.</p>
-          </div>
-          
-          <div class="feature-item" data-feature="conservation">
-            <h3>Conservation</h3>
-            <p>Zero emissions operation with <span class="marker marker--double marker-animate">whisper-quiet</span> performance protects your <span class="marker marker--double marker-animate">environment</span> and neighborhood peace. Solar charging capabilities and biodegradable cutting oil make HECTOR the sustainable choice for <span class="marker marker--double marker-animate">modern</span> gardening.</p>
-          </div>
+        <div class="feature-item" data-feature="autonomy">
+          <h3>Autonomy</h3>
+          <p><span class="marker marker--double marker-animate">HECTOR</span> operates completely <span class="marker marker--double marker-animate">independently</span>, requiring no human intervention during hedge cutting. Advanced <span class="marker marker--double marker-animate">AI navigation</span> ensures precise trimming while <span class="marker marker--double marker-animate">avoiding obstacles</span> and maintaining perfect hedge geometry throughout your <span class="marker marker--double marker-animate">garden</span>.</p>
+        </div>
+        
+        <div class="feature-item" data-feature="precision">
+          <h3>Precision</h3>
+          <p>State-of-the-art <span class="marker marker--double marker-animate">sensors</span> and cutting mechanisms deliver <span class="marker marker--double marker-animate">millimeter-precise</span> hedge shaping. Our patented blade system adapts to different hedge types and densities, ensuring <span class="marker marker--double marker-animate">optimal results</span> every time with minimal waste.</p>
+        </div>
+        
+        <div class="feature-item" data-feature="conservation">
+          <h3>Conservation</h3>
+          <p>Zero emissions operation with <span class="marker marker--double marker-animate">whisper-quiet</span> performance protects your <span class="marker marker--double marker-animate">environment</span> and neighborhood peace. Solar charging capabilities and biodegradable cutting oil make HECTOR the sustainable choice for <span class="marker marker--double marker-animate">modern</span> gardening.</p>
+        </div>
         </div>
       </div>
     </div>
@@ -142,25 +143,62 @@
   <!-- About Us: Mission Section -->
   <section class="about-mission" id="about-mission">
     <div class="about-mission__inner">
+      
       <h2 class="about-mission__title">Our <span class="marker marker--double marker-animate">Mission</span></h2>
       <p class="about-mission__text"><span class="marker marker--double marker-animate">Every</span> hedge in this world won’t have to be cut by human power anymore. Hedges will be the accelerator to battle climate change. With <span class="marker marker--double marker-animate">HECTOR</span> this will be not just a dream but <span class="marker marker--double marker-animate">reality</span>.</p>
-      <div class="about-mission__facts-title">Facts:</div>
+      <div class="about-mission__facts-title">Facts and Opportunities:</div>
       <div class="about-mission__facts-box" aria-label="Key facts">
+        <video class="about-mission__video" autoplay muted loop playsinline>
+          <source src="assets/floatingHectorHighRes.mp4" type="video/mp4">
+          <!-- Fallback for browsers that don't support video -->
+          <div class="video-fallback" style="background-image: url('/assets/floatingHECTOR3.png');"></div>
+        </video>
+        <div class="about-mission__light-beam"></div>
         <div class="about-mission__facts">
+          
           <div class="about-mission__fact">
-            <span class="fact-value"><span class="fact-number" data-target="125000000" data-decimals="0">125.000.000</span> <span class="fact-unit marker marker--double marker-animate">km</span></span>
-            <span class="fact-text">of hedges in <br>Europe</span>
+            <div class="fact-head">
+              <img class="fact-illustration" src="/assets/01hedge_final.png" alt="Hedge habitat" />
+              <div class="fact-copy">
+                <span class="fact-value"><span class="fact-number" data-target="8900000" data-decimals="0">8.900.000</span> <span class="fact-unit marker marker--double marker-animate">km</span></span>
+                <span class="fact-text">of hedges in <br>Europe</span>
+              </div>
+            </div>
+            <div class="fact-desc">There are over 8.900.000 km of hedges in Europe. Those are the habitat of a multitude of different species of animals especially birds. Hedges are the sign of prosperity and luxury, pathing every property of renomated castles, golf clubs, etc.</div>
           </div>
           <div class="about-mission__fact">
-            <span class="fact-value"><span class="fact-number" data-target="1300000000" data-decimals="0">1.300.000.000</span> <span class="fact-unit marker marker--double marker-animate">hours</span></span>
-            <span class="fact-text">each year spent on <br> hedge cutting</span>
+            <div class="fact-head">
+              <img class="fact-illustration" src="/assets/02hedge_final.png" alt="Hedge labor" />
+              <div class="fact-copy">
+                <span class="fact-value"><span class="fact-number" data-target="120000000" data-decimals="0">120.000.000</span> <span class="fact-unit marker marker--double marker-animate">hours</span></span>
+                <span class="fact-text">each year spent on <br> hedge cutting</span>
+              </div>
+            </div>
+            <div class="fact-desc">Up to this day there are over 120.000.000 hours spent on hedge cutting every year. This accounts for a lot of manual labor which is to this day done by hand. With the ever so fast increasing “Fachkräftemangel” and demographic change there wont be enough manpower to do this work.</div>
           </div>
           <div class="about-mission__fact">
-            <span class="fact-value"><span class="fact-number" data-target="3.5" data-decimals="1">3.5</span> <span class="fact-unit marker marker--double marker-animate">tons of CO2</span></span>
-            <span class="fact-text">conversed into O2 <br>per km of hedge</span>
+            <div class="fact-head">
+              <img class="fact-illustration" src="/assets/03hedge_final.png" alt="Hedge climate" />
+              <div class="fact-copy">
+                <span class="fact-value"><span class="fact-number" data-target="3.5" data-decimals="1">3.5</span> <span class="fact-unit marker marker--double marker-animate">tons of CO2</span></span>
+                <span class="fact-text">conversed into O2 <br>per km of hedge</span>
+              </div>
+            </div>
+            <div class="fact-desc">Hedges are one of the biggest catalysators of conversion of Co2 to 02. They are key components in the fight against climate change and through different European initiatives are set to be chosen as the hope of the fight for a clean climate without the cost of optical downsides.</div>
           </div>
+        
+        <!-- Vertical timeline centered on page starting from first fact head -->
+        <div class="facts-timeline" aria-hidden="true"></div>
+        <!-- Timeline dots at each fact head -->
+        <div class="timeline-dot fact-dot-1" aria-hidden="true"></div>
+        <div class="timeline-dot fact-dot-2" aria-hidden="true"></div>
+        <div class="timeline-dot fact-dot-3" aria-hidden="true"></div>
+
+
+        <!-- Glass drop positioned at first fact dot -->
         </div>
       </div>
+      
     </div>
   </section>
 
@@ -184,27 +222,27 @@
           <div class="story-simple-point" data-year="2021" style="left: 80vw;">
             <div class="year-above">2021</div>
             <div class="dot"></div>
-            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+            <div class="desc-below"><strong>Initial <span class="marker marker--double">Concepts</span> and Key Acquisitions</strong><br>In 2021, the founders laid the <span class="marker marker--double">groundwork</span> for their robotic platform by creating the first <span class="marker marker--double">sketches</span>, technical plans, and concept designs. During this phase, they also made their initial key acquisitions, securing <span class="marker marker--double">essential equipment</span> and resources that would enable the development and prototyping of their innovative solution.</div>
           </div>
           <div class="story-simple-point" data-year="2022" style="left: 120vw;">
             <div class="year-above">2022</div>
             <div class="dot"></div>
-            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+            <div class="desc-below"><strong>Proof of <span class="marker marker--double">Concept</span></strong><br>Development of the first <span class="marker marker--double">proof of concept</span>. A small version of <span class="marker marker--double">HECTOR</span> which should have all the core functions. Founders started to place strong emphasis on expanding their <span class="marker marker--double">expertise</span> in the areas most critical to the company's success. Each founder invested in <span class="marker marker--double">targeted learning</span> to complement their personal strengths and to ensure that the team as a whole could cover all aspects of product development and growth.</div>
           </div>
           <div class="story-simple-point" data-year="2023" style="left: 140vw;">
             <div class="year-above">2023</div>
             <div class="dot"></div>
-            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+            <div class="desc-below"><strong>First <span class="marker marker--double">Prototype</span> Completed</strong><br>In 2023, the founders successfully completed the very first <span class="marker marker--double">prototype</span> of their robotic platform. This <span class="marker marker--double">milestone</span> marked the transition from vision to reality, as their initial ideas and concepts were translated into a <span class="marker marker--double">tangible product</span>. By combining their diverse expertise in engineering, design, and business, the team was able to bring the prototype to life and create a solid foundation for future testing, refinement, and development.</div>
           </div>
           <div class="story-simple-point" data-year="2024" style="left: 160vw;">
             <div class="year-above">2024</div>
             <div class="dot"></div>
-            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+            <div class="desc-below"><strong>First Full Prototype and Initial <span class="marker marker--double">External</span> Contacts</strong><br>In 2024, the founders completed the first <span class="marker marker--double">fully functional</span> prototype of their robotic platform, marking a major step forward in its development. During the same year, they established their first contacts with <span class="marker marker--double">governmental funding</span> programs, patent offices, and potential investors. In addition, they reached out to their first major prospective customers and successfully received <span class="marker marker--double">Letters of Intent (LOIs)</span> from institutions such as Schloss Versailles and the City of Tübingen, laying the groundwork for future pilot projects and collaborations.</div>
           </div>
           <div class="story-simple-point" data-year="2025" style="left: 180vw;">
             <div class="year-above">2025</div>
             <div class="dot"></div>
-            <div class="desc-below"><strong>Birth of the idea of <span class="marker marker--double">HECTOR</span>:</strong><br>With the start of Covid. Our founders were sitting ain their home on a sunny summer day. They had to cut the hedges of their <span class="marker marker--double">home garden</span> where tehere they got the crazy idea to just build a <span class="marker marker--double">hedge cutting robot</span> with some wood bought at the next utilities store.</div>
+            <div class="desc-below"><strong>EXIST Funding and <span class="marker marker--double">MVP</span> Development</strong><br>In 2025, the founders successfully secured their first major <span class="marker marker--double">public funding</span> through the <span class="marker marker--double">EXIST program</span>, providing a significant boost to their project. With this support, they began developing the first <span class="marker marker--double">market-ready MVP</span> of their robotic platform, designed to be fully functional and suitable for initial pilot projects. This stage allowed the team to test their solutions in real-world scenarios, gather critical feedback, and refine the platform for future growth and commercial application.</div>
           </div>
         </div>
       </div>
@@ -222,7 +260,7 @@
           <div class="contact-left">
             <div class="contact-eyebrow">Contact us</div>
             <h2 class="contact-title">Let's get in touch</h2>
-            <p class="contact-subtitle">or reach out manually to us at <a href="mailto:hello@funktechnologies.com">hello@funktechnologies.com</a></p>
+            <p class="contact-subtitle">or reach out manually to us at <a href="mailto:hello@funktechnologies.com">info@funktechnologies.com</a></p>
           </div>
           <div class="contact-right">
             <form class="contact-form" id="contactForm" name="contact" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="off" novalidate>
@@ -251,7 +289,7 @@
                 <label for="agreePrivacy">I hereby agree to the <span class="privacy-link">Privacy Policy</span> terms.</label>
               </div>
               <div class="form-status" aria-live="polite" style="min-height:1.2rem;font-size:0.9rem;margin-bottom:0.4rem;color:#a3e635;"></div>
-              <button type="submit" class="contact-submit">Submit Form</button>
+              <div type="submit" class="contact-submit">Submit</div>
             </form>
             
           </div>
@@ -314,6 +352,11 @@
     </footer>
   </section>
   <script src="https://unpkg.com/scrollreveal"></script>
+  <!-- Liquid Glass JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="libs/liquid-glass-js/container.js"></script>
+  <script src="libs/liquid-glass-js/button.js"></script>
+  <script src="glassRender.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

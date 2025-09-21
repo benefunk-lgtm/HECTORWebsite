@@ -1369,12 +1369,11 @@ section.about p, section.contact p {
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #000;
-  border: 2px solid #16a34a;
+  background: #165d30;
   border-radius: 20px;
   color: #fff;
   padding: 0.9rem 1.2rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   font-weight: 500;
   cursor: pointer;
@@ -1810,6 +1809,7 @@ body, .vision-section, .team-section, .invest-section, .contact-section {
 .footer-legal .legal-list { list-style: none; display: flex; flex-direction: row; gap: 1.2rem; padding: 0; margin: 0; align-items: center; }
 .footer-legal .legal-link { color: rgba(255,255,255,0.75); text-decoration: none; }
 .footer-legal .legal-link:hover { color: rgba(255,255,255,0.95); }
+
 
 @media (max-width: 900px) {
   .site-footer .footer-inner { max-width: 94vw; padding: 1.6rem 0 2rem 0; }
